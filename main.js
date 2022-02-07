@@ -1,0 +1,66 @@
+let carArray = [];
+let selectedType = "";
+let carYear = 0;
+
+// define a constructor to create note objects
+let carObject = function (pData, pType, pYear) {
+    this.data = pData;
+    this.type = pType;
+    this.year = pYear;
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+    document.getElementById("buttonAdd").addEventListener("click", function () {
+        let carNmae = document.getElementById("car").value;
+        let myCarObj = new carObject(carNmae, selectedType,carYear);
+        carArray.push(myCarObj);
+        console.log(carArray);
+        document.getElementById("car").value = "";
+        document.getElementById("year").value = "";
+    });
+
+    $(document).bind("change", "#select-type", function (event, ui) {
+        selectedType = document.getElementById("select-type").value;
+    });
+    $(document).bind("change", "#year", function (event, ui) {
+        carYear = document.getElementById("year").value;
+    });
+
+    // page before show code *************************************************************************
+    $(document).on("pagebeforeshow", "#list", function (event) {   
+        createList();
+    });
+    
+
+});
+
+
+
+function createList() {
+    
+    // clear prior data
+
+
+    var myul = document.getElementById("myList");
+    myul.innerHTML = '';
+
+    carArray.forEach(function (element,) {   // use handy array forEach method
+        var li = document.createElement('li');
+        li.innerHTML = element.data + ":  " + element.type + "  (" +element.year+")";
+        myul.appendChild(li);
+    });
+
+
+    var myulDel = document.getElementById("myListDelete");
+    myulDel.innerHTML = '';
+
+    carArray.forEach(function (element,) {   // use handy array forEach method
+        var li = document.createElement('li');
+        li.innerHTML = element.data + ":  " + element.type + "  (" +element.year+")" ;
+        myulDel.appendChild(li);
+    });
+};
+
