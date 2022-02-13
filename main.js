@@ -34,6 +34,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         createList();
     });
     
+    $(document).on("pagebeforeshow", "#sort", function (event) {   
+        showSortList();
+    });
+
 
 });
 
@@ -52,11 +56,14 @@ function createList() {
         li.innerHTML = element.data + ":  " + element.type + "  (" +element.year+")";
         myul.appendChild(li);
     });
+};
 
 
-    var myulDel = document.getElementById("myListDelete");
+function showSortList() { 
+    // clear prior data
+    var myulDel = document.getElementById("myListSort");
     myulDel.innerHTML = '';
-
+ 
     carArray.forEach(function (element,) {   // use handy array forEach method
         var li = document.createElement('li');
         li.innerHTML = element.data + ":  " + element.type + "  (" +element.year+")" ;
